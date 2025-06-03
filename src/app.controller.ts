@@ -14,4 +14,11 @@ export class AppController {
    getHallo(): string{
      return this.appService.getHallo();
    }
+
+   @Get('france')
+getFrance(): string{
+     return this.appService.getFrance();
+   }
+
+  
 }
