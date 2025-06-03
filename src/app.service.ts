@@ -10,6 +10,10 @@ export class AppService {
      return 'hola aleman';
   }
 
+  getFrance():string{
+     return 'hola frances';
+  } 
 
+  
 }
 
