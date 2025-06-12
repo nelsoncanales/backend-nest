@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
+import { response } from 'express';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
@@ -22,4 +23,27 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  it('/operaciones (GET)', () => {
+    return request(app.getHttpServer())
+    .get('/operaciones')
+    .query({operacion: 'suma', a:10, b:30 })
+    .expect(200)
+    .expect('Content-type', /application\/json/)
+    .then((response) => {
+      expect(response.body.resultado).toBe(40);
+    });
+  });
+
+  it('/operaciones (GET)', () => {
+    return request(app.getHttpServer())
+    .get('/operaciones')
+    .query({operacion: 'suma', a: 100, b: 100})
+    .expect(200)
+    .expect('Content-type', /application\/json/)
+    .then((response) => {
+      expect(response.body.resultado).toBe(200);
+    });
+  })
+
 });
